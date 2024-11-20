@@ -1,0 +1,76 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/gem/oq-engine:
+      branch: master
+      repo: https://github.com/gem/oq-engine.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/gem/oq-engine git:
+        commands:
+        - /usr/bin/env sh .sqa/script.hasty-cinnamon-seal.sh
+        container: qc.acc_baggy-carmine-yak
+  QC.Doc:
+    repos:
+      github.com/gem/oq-engine find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.clammy-myrtle-koala.sh
+        container: qc.doc_woozy-sepia-okapi
+      github.com/gem/oq-engine git:
+        commands:
+        - /usr/bin/env sh .sqa/script.wimpy-ultramarine-bongo.sh
+        container: qc.doc_snazzy-firebrick-crane
+      github.com/gem/oq-engine markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.craggy-taupe-hippopotamus.sh
+        container: qc.doc_sleazy-cyan-clam
+      github.com/gem/oq-engine restructuredtext-lint:
+        commands:
+        - /usr/bin/env sh .sqa/script.gummy-denim-worm.sh
+        container: qc.doc_wimpy-denim-dugong
+  QC.Lic:
+    repos:
+      github.com/gem/oq-engine licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.greasy-periwinkle-albatross.sh
+        container: qc.lic_thirsty-bronze-beaver
+  QC.Sec:
+    repos:
+      github.com/gem/oq-engine bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.thirsty-cinnabar-akita.sh
+        container: qc.sec_pokey-lime-collie
+  QC.Sty:
+    repos:
+      github.com/gem/oq-engine flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.hazy-crimson-alligator.sh
+        container: qc.sty_squirrely-wisteria-wrasse
+      github.com/gem/oq-engine jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.sleepy-blue-chihuahua.sh
+        container: qc.sty_cozy-persimmon-earwig
+      github.com/gem/oq-engine oclint:
+        commands:
+        - /usr/bin/env sh .sqa/script.pretty-pink-dachshund.sh
+        container: qc.sty_slaphappy-tomato-birman
+  QC.Uni:
+    repos:
+      github.com/gem/oq-engine pytest:
+        commands:
+        - /usr/bin/env sh .sqa/script.muggy-magnolia-cattle.sh
+        container: qc.uni_paltry-violet-paradise
+  QC.Ver:
+    repos:
+      github.com/gem/oq-engine get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.gimpy-green-dalmatian.sh
+        container: qc.ver_stinky-cinnamon-jackal
+timeout: 5400
